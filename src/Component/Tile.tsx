@@ -1,6 +1,8 @@
 import React, { useEffect, useState }  from 'react';
 import './tile.scss';
 
+// Complete the timer without using setInterval.
+
 type TileProps = {
   countDownSeconds: number;
 }
@@ -12,34 +14,14 @@ export const Tile: React.FC<TileProps> = ({countDownSeconds}) => {
   const [timer, setTimer] = useState(start);
 
   useEffect(()=>{
-    setTimeout(()=>{setWidth(0);},0);
+    setWidth(0);
   },[]);
 
-  useEffect(()=>{
-
-    const intervalId = setInterval(()=>{
-      
-
-      setTimer(prevTimer=>{
-        if(prevTimer <= 0){
-          clearInterval(intervalId);
-          return 0;
-        }
-      console.log(prevTimer);
-        return prevTimer-1;
-      });
-
-    },1000);
-
-    return ()=>{
-      clearInterval(intervalId);
-    }
-  },[])
   
   return (
     <div className="tile">
       <div className='timer'>{timer}</div>
-      <div className='progress-bar' style={{
+      <div  style={{
          height: 5,
          width: `${width}%`,
          transition: `width ${30}s linear`,
